@@ -28,15 +28,24 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void decrement(View view) {
-        quantity = quantity - 1;
+        if(quantity <=0 )
+            quantity = 0;
+        else
+            quantity = quantity - 1;
         display(quantity);
+
     }
 
     public void submitOrder(View view) {
         int numberOfCoffees = 2;
-
+        int price = quantity *5;
+        String priceMessage;
         /*display(numberOfCoffees);*/
-        displayPrice(quantity * 5);
+        if(quantity != 0)
+            priceMessage = "Price: $"+price+"\nThank You!";
+        else
+            priceMessage = "Price: $"+price;
+        displayMessage(priceMessage);
     }
 
     /**
@@ -55,5 +64,12 @@ public class MainActivity extends ActionBarActivity {
     private void displayPrice(int number) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
+    }
+    /**
+     * This method displays the given text on the screen.
+     */
+    private void displayMessage(String message) {
+        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        priceTextView.setText(message);
     }
 }
